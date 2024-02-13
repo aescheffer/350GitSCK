@@ -24,15 +24,15 @@ def ron_death():
    cedric.destroy()
    T.config(text="bitch boy")
    #restart.place(x=100,y=100)
-   quit.place(x=100,y=200)
+   quit.place(x=100,y=300)
 
 #advance to goblet of fire if Cedric or Harry is chosen
 def gob():
    ron.destroy()
    harry.destroy()
    cedric.destroy()
-   goblet_yes.place(x=100,y=100)
-   goblet_no.place(x=170,y=170)
+   goblet_yes.place(x=100,y=300)
+   goblet_no.place(x=200,y=300)
    T.config(text="Will you place your name in the goblet of fire?")
 
 def explode_by_gob():
@@ -46,9 +46,9 @@ def explode_by_gob():
 def dragon_choice():
    goblet_yes.destroy()
    goblet_no.destroy()
-   hungarian.place(x=100,y=100)
-   # chinese.place(x=100,y=200)
-   # swedish.place(x=100,y=300)
+   hungarian.place(x=100,y=300)
+   chinese.place(x=400,y=300)
+   swedish.place(x=700,y=300)
    T.config(text="Too bad! You're the main character so you\n"
                  "don't get a choice! The first test is...\n"
                  "DRAGONS!!! Choose your dragon!")
@@ -57,6 +57,28 @@ def hungarian():
    hungarian.destroy()
    chinese.destroy()
    swedish.destroy()
+   # gilly.place(x=200,y=300)
+   # shark.place(x=100,y=300)
+   T.config(text="You were able to defeat the Hungarian Horntail and move on to the next round!\n"
+                 "You must find a way to breathe underwater for an hour. What will you use?")
+
+def chinese():
+   hungarian.destroy()
+   chinese.destroy()
+   swedish.destroy()
+   # bubble.place(x=200,y=300)
+   # mystery.place(x=100,y=300)
+   T.config(text="You defeated the Chinese Fireball! Moving on to the underwater challenge,\n"
+                 "what will you use to breathe underwater for an hour?")
+
+def swedish_death():
+   hungarian.destroy()
+   chinese.destroy()
+   swedish.destroy()
+   T.config(text="The Swedish Shortsnout died before your trial, and since your \n"
+                 "lives were tied, your death was assigned to your cousin Vikram III.\n"
+                 "Your memory will not live on.")
+
 
 
 
@@ -84,7 +106,16 @@ goblet_no = Button(top, text="No", command = dragon_choice)
 #Choose your dragon!
 hungarian = Button(top, text="Hungarian Horntail", command = hungarian)
 chinese = Button(top, text="Chinese Fireball", command = chinese)
-swedish = Button(top, text="Swedish Shortsnout", command=idk)
+swedish = Button(top, text="Swedish Shortsnout", command=swedish_death)
+
+# #Water challenge
+# gilly = Button(top, text="Gilly Weed", command = ron_and_frenchie)
+# shark = Button(top, text="Shark Head Spell", command= hermione)
+#
+# bubble = Button(top, text="Oxygen Bubble Spell", command=cho)
+# mystery = Button(top, text="Mystery Potion", command=bleach_death)
+
+#
 
 
 
