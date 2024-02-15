@@ -61,6 +61,8 @@ def hungarian():
    # shark.place(x=100,y=300)
    T.config(text="You were able to defeat the Hungarian Horntail and move on to the next round!\n"
                  "You must find a way to breathe underwater for an hour. What will you use?")
+   gilly.place(x=200, y=300)
+   shark.place(x=500, y=300)
 
 def chinese():
    hungarian.destroy()
@@ -70,6 +72,8 @@ def chinese():
    # mystery.place(x=100,y=300)
    T.config(text="You defeated the Chinese Fireball! Moving on to the underwater challenge,\n"
                  "what will you use to breathe underwater for an hour?")
+   bubble.place(x=200, y=300)
+   mystery.place(x=500, y=300)
 
 def swedish_death():
    hungarian.destroy()
@@ -79,7 +83,17 @@ def swedish_death():
                  "lives were tied, your death was assigned to your cousin Vikram III.\n"
                  "Your memory will not live on.")
 
+def ron_and_frenchie():
+   return
 
+def hermione():
+   return
+
+def cho():
+   return
+
+def bleach_death():
+   return
 
 
 
@@ -109,11 +123,11 @@ chinese = Button(top, text="Chinese Fireball", command = chinese)
 swedish = Button(top, text="Swedish Shortsnout", command=swedish_death)
 
 # #Water challenge
-# gilly = Button(top, text="Gilly Weed", command = ron_and_frenchie)
-# shark = Button(top, text="Shark Head Spell", command= hermione)
+gilly = Button(top, text="Gilly Weed", command = ron_and_frenchie)
+shark = Button(top, text="Shark Head Spell", command= hermione)
 #
-# bubble = Button(top, text="Oxygen Bubble Spell", command=cho)
-# mystery = Button(top, text="Mystery Potion", command=bleach_death)
+bubble = Button(top, text="Oxygen Bubble Spell", command=cho)
+mystery = Button(top, text="Mystery Potion", command=bleach_death)
 
 #
 
