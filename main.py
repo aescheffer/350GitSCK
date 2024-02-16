@@ -47,9 +47,9 @@ def explode_by_gob():
 def dragon_choice():
    goblet_yes.destroy()
    goblet_no.destroy()
-   hungarian.place(relx=0.4, rely=0.5, anchor=CENTER)
+   hungarian.place(relx=0.35, rely=0.5, anchor=CENTER)
    chinese.place(relx=0.5, rely=0.5, anchor=CENTER)
-   swedish.place(relx=0.6, rely=0.5, anchor=CENTER)
+   swedish.place(relx=0.65, rely=0.5, anchor=CENTER)
    T.config(text="Too bad! You're the main character so you\n"
                  "don't get a choice! The first test is...\n"
                  "DRAGONS!!! Choose your dragon!")
@@ -71,8 +71,8 @@ def chinese():
    swedish.destroy()
    T.config(text="You defeated the Chinese Fireball! Moving on to the underwater challenge,\n"
                  "what will you use to breathe underwater for an hour?")
-   bubble.place(relx=0.45, rely=0.5, anchor=CENTER)
-   mystery.place(relx=0.55, rely=0.5, anchor=CENTER)
+   bubble.place(relx=0.4, rely=0.5, anchor=CENTER)
+   mystery.place(relx=0.6, rely=0.5, anchor=CENTER)
 
 #if choose swedish dragon, die
 def swedish_death():
