@@ -9,13 +9,13 @@ text = 'Choose your character!'
 def quit():
    top.destroy()
 
-# def restart():
-#    quit.forget()
-#    restart.forget()
+# def redo():
+#    # quit.place_forget()
+#    # restart.place_forget()
 #    ron.place(x=300,y=300)
 #    harry.place(x=200,y=300)
 #    cedric.place(x=100,y=300)
-#    T.config = 'Choose your character!'
+#    T.config(text='Choose your character!')
 
 #if you choose Ron as your character, instant death
 def ron_death():
@@ -23,8 +23,7 @@ def ron_death():
    harry.destroy()
    cedric.destroy()
    T.config(text="bitch boy")
-   #restart.place(x=100,y=100)
-   quit.place(x=100,y=300)
+   quit.place(x=200,y=300)
 
 #advance to goblet of fire if Cedric or Harry is chosen
 def gob():
@@ -194,8 +193,8 @@ def expelliarmus():
    T.config(text="You cast Expelliarmus, unarming Viktor of his wand. As you clutch one handle of the cup, you notice\n"
                  "that Cedric Diggory has grasped the other at the same time. Together, you are transported to a\n"
                  "cemetery where Voldemort himself has been waiting! What will you do???")
-   run_voldy.place(x=200,y=300)
-   fight_voldy.place(x=500,y=300)
+   vol_run.place(x=200,y=300)
+   fight.place(x=500,y=300)
 
 #Label changes depending on where you are in the game
 T = Label(top, text=text)
