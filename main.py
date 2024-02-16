@@ -30,8 +30,8 @@ def gob():
    ron.destroy()
    harry.destroy()
    cedric.destroy()
-   goblet_yes.place(x=100,y=300)
-   goblet_no.place(x=200,y=300)
+   goblet_yes.place(relx=0.55, rely=0.5, anchor=CENTER)
+   goblet_no.place(relx=0.45, rely=0.5, anchor=CENTER)
    T.config(text="Will you place your name in the goblet of fire?")
 
 #if choose YES for goblet of fire, die
@@ -47,9 +47,9 @@ def explode_by_gob():
 def dragon_choice():
    goblet_yes.destroy()
    goblet_no.destroy()
-   hungarian.place(x=100,y=300)
-   chinese.place(x=400,y=300)
-   swedish.place(x=700,y=300)
+   hungarian.place(relx=0.4, rely=0.5, anchor=CENTER)
+   chinese.place(relx=0.5, rely=0.5, anchor=CENTER)
+   swedish.place(relx=0.6, rely=0.5, anchor=CENTER)
    T.config(text="Too bad! You're the main character so you\n"
                  "don't get a choice! The first test is...\n"
                  "DRAGONS!!! Choose your dragon!")
@@ -61,8 +61,8 @@ def hungarian():
    swedish.destroy()
    T.config(text="You were able to defeat the Hungarian Horntail and move on to the next round!\n"
                  "You must find a way to breathe underwater for an hour. What will you use?")
-   gilly.place(x=200, y=300)
-   shark.place(x=500, y=300)
+   gilly.place(relx=0.45, rely=0.5, anchor=CENTER)
+   shark.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #if choose chinese dragon, given choice between o2 bubble or mystery potion
 def chinese():
@@ -71,8 +71,8 @@ def chinese():
    swedish.destroy()
    T.config(text="You defeated the Chinese Fireball! Moving on to the underwater challenge,\n"
                  "what will you use to breathe underwater for an hour?")
-   bubble.place(x=200, y=300)
-   mystery.place(x=500, y=300)
+   bubble.place(relx=0.45, rely=0.5, anchor=CENTER)
+   mystery.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #if choose swedish dragon, die
 def swedish_death():
@@ -98,8 +98,8 @@ def ron_and_frenchie():
    T.config(text="Great choice! The Gilly Weed gave you flippers, making you fast enough to save\n"
                  "Ron Weasley and a sickly french child. You move on to the maze! Before you enter,\n"
                  "will you pick the left or right path?")
-   left.place(x=200,y=300)
-   right.place(x=500,y=300)
+   left.place(relx=0.45, rely=0.5, anchor=CENTER)
+   right.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #if choose shark head spell, save hermione
 def hermione():
@@ -108,8 +108,8 @@ def hermione():
    T.config(text="The shark head spell gave you the confidence to rescue the brightest witch in your school:\n"
                  "Hermione Granger. She hints that \"the safe path doesn't always feel right.\" You have reached\n"
                  "the final challenge of the maze...which path will you choose?")
-   left.place(x=200,y=300)
-   right.place(x=500,y=300)
+   left.place(relx=0.45, rely=0.5, anchor=CENTER)
+   right.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #if choose bubble spell, save cho
 def cho():
@@ -118,8 +118,8 @@ def cho():
    T.config(text="The bubble spell gave you the confidence to save the Ravenclaw, Cho! She gives you the advice that, when it\n "
             "comes to navigating the maze, \"take the high road.\" You misinterpret her advice and cheat by climbing over \n"
             "the hedges until you're caught by a soul-sucking dementor! What do you do?")
-   patronus.place(x=200,y=300)
-   dem_run.place(x=500,y=300)
+   patronus.place(relx=0.45, rely=0.5, anchor=CENTER)
+   dem_run.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #cast patronus charm on dementor
 def patronus():
@@ -129,8 +129,8 @@ def patronus():
                  "slug that overpowers the dementor. The patronus also reveals the Tri Wizard Cup right in front of you, but\n"
                  "Viktor Krum has spotted it first and he raises his wand to attack you! What spell will you cast to\n"
                  "defend yourself?")
-   expel.place(x=200,y=300)
-   avis.place(x=500,y=300)
+   expel.place(relx=0.45, rely=0.5, anchor=CENTER)
+   avis.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #run from the dementor
 def dem_run():
@@ -147,8 +147,8 @@ def left():
    T.config(text="You head down the left path and before you know it, you've found the cup! And so has Cedric! You grab it\n"
                  "together and are transported to...a cemetery? And the dark wizard Voldemort is here too?!?! What\n"
                  "ever will you do???")
-   fight.place(x=200,y=300)
-   vol_run.place(x=500,y=300)
+   fight.place(relx=0.45, rely=0.5, anchor=CENTER)
+   vol_run.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #duel Voldemort --> Win
 def fight_voldy():
@@ -174,8 +174,8 @@ def right():
    T.config(text="You walk down the right path and spot the Tri Wizard Cup! As you approach the cup, you suddenly \n"
                  "lock eyes with a bewitched Viktor Krum! You both race toward the cup and you have time to cast \n"
                  "one spell. Unfortunately, you only remember two...which do you pick?")
-   expel.place(x=200,y=300)
-   avis.place(x=500,y=300)
+   expel.place(relx=0.45, rely=0.5, anchor=CENTER)
+   avis.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #defence from Viktor Krum
 def avis():
@@ -193,12 +193,12 @@ def expelliarmus():
    T.config(text="You cast Expelliarmus, unarming Viktor of his wand. As you clutch one handle of the cup, you notice\n"
                  "that Cedric Diggory has grasped the other at the same time. Together, you are transported to a\n"
                  "cemetery where Voldemort himself has been waiting! What will you do???")
-   vol_run.place(x=200,y=300)
-   fight.place(x=500,y=300)
+   vol_run.place(relx=0.45, rely=0.5, anchor=CENTER)
+   fight.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #Label changes depending on where you are in the game
 T = Label(top, text=text)
-T.place(x=200,y=200)
+T.place(relx=0.5, rely=0.4, anchor=CENTER)
 
 #restart and quit buttons
 #restart = Button(top, text="Restart", command=restart)
@@ -206,11 +206,11 @@ quit = Button(top, text="Quit", command=top.destroy)
 
 #character choice: Ron (death), Harry, or Cedric
 ron = Button(top, text ="Ron", command = ron_death)
-ron.place(x=300,y=300)
+ron.place(relx=0.6, rely=0.5, anchor=CENTER)
 harry = Button(top, text="Harry", command = gob)
-harry.place(x=200,y=300)
+harry.place(relx=0.5, rely=0.5, anchor=CENTER)
 cedric = Button(top, text="Cedric", command = gob)
-cedric.place(x=100,y=300)
+cedric.place(relx=0.4, rely=0.5, anchor=CENTER)
 
 #goblet of fire yes or no
 goblet_yes = Button(top, text="Yes", command = explode_by_gob)
