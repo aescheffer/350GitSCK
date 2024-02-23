@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 top = Tk()
 top.geometry("1000x700")
-#top.config(cursor='circle')
 top.title("Hammy Popper Demo")
 text = 'Choose your character!'
 
@@ -15,8 +14,7 @@ def restart():
     ron.place(relx=0.6, rely=0.5, anchor=CENTER)
     harry.place(relx=0.5, rely=0.5, anchor=CENTER)
     cedric.place(relx=0.4, rely=0.5, anchor=CENTER)
-    #quit.place_forget()
-    #restart_button.place_forget()
+
 
 #if you choose Ron as your character, instant death
 def ron_death():
@@ -24,8 +22,7 @@ def ron_death():
    harry.place_forget()
    cedric.place_forget()
    T.config(text="bitch boy")
-   #quit.place(x=200,y=300)
-   #restart_button.place(relx=0.45, rely=0.5, anchor=CENTER)
+
 
 #advance to goblet of fire if Cedric or Harry is chosen
 def gob():
@@ -42,8 +39,7 @@ def explode_by_gob():
    goblet_no.place_forget()
    T.config(text="You're too young to put your name in the goblet!\n"
                  "You explode and the first-years use your head as a quaffle.")
-   #restart.place(x=100,y=100)
-   #quit.place(x=100,y=200)
+
 
 #if choose NO for goblet of fire, choose dragon
 def dragon_choice():
@@ -92,7 +88,7 @@ def bleach_death():
    mystery.place_forget()
    T.config(text="The mystery potion turns out to be bleach supplied by Draco Malfoy. You jump into the water with\n"
                  "full confidence but are never seen again. No one notices that there is one less contestant.")
-   #quit.place(x=200,y=300)
+
 
 #if choose gilly weed, save Ron and French girl
 def ron_and_frenchie():
@@ -141,7 +137,6 @@ def dem_run():
    dem_run.place_forget()
    T.config(text="Fueled by fear, you attempt to run from the dementor but onlly manage to fall a great height from\n"
                  "atop the hedges and break your neck, dying instantly. Too bad there's no spell to fix that!")
-   #quit.place(x=200,y=300)
 
 #take left path in the maze
 def left():
@@ -187,7 +182,6 @@ def avis():
    T.config(text="You cast the Avis spell, summoning a small flock of birds. Viktor is unfazed and the birds take more\n"
                  "interest in the berries growing from the hedges than coming to your aid. Viktor body slams you into the\n"
                  "ground where vines engulf your body and drag you deeper into the maze. You die cold and utterly alone.")
-   #quit.place(x=200,y=300)
 
 #defence from Viktor Krum
 def expelliarmus():
@@ -248,41 +242,8 @@ fight = Button(top,text="Duel Voldemort",command=fight_voldy)
 vol_run = Button(top,text="RUN!!!",command=run_voldy)
 
 
-
-
-
+#make window appear
 top.mainloop()
 
 
-
-#
-# import tkinter
-# from tkinter import *
-#
-# window = tkinter.Tk()
-# # set window size using geometry funct --> in pixels
-# window.geometry("350x200")
-#
-# # to rename the title of the window
-# window.title("GUI")
-#
-# # pack is used to show the object in the window
-# #label = tkinter.Label(window, text = "Hello World!", font=("Arial Bold", 5git 0)).pack()
-#
-# #create button --> grid function sets button position
-# #bg = background color, fg = foreground color
-# # bt = Button(window,text="Enter", bg="blue",fg="red")
-# # bt.grid(column=1,row=0)
-# #test on line 18!!!
-# #test on line 19
-#
-#
-# #makes button that will make program stop running
-# #bd is border width pixels
-# btn = Button(window, activeforeground=red, text="Destroy", bd="15", command = window.destroy)
-# btn.pack(side="bottom")
-#
-# #this makes the window appear
-# window.mainloop()
-#
 
