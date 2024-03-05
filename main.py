@@ -4,12 +4,15 @@ top = Tk()
 top.geometry("1000x700")
 top.title("Hammy Popper Demo")
 text = 'Choose your character!'
+all_buttons = []
 
 def quit():
    top.destroy()
 
 def restart():
     # Reset the game state to its initial values
+    for button in all_buttons:
+        button.place_forget()
     T.config(text=text)
     ron.place(relx=0.6, rely=0.5, anchor=CENTER)
     harry.place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -240,7 +243,8 @@ dem_run = Button(top,text="Run for your life!",command=dem_run)
 #Final choice
 fight = Button(top,text="Duel Voldemort",command=fight_voldy)
 vol_run = Button(top,text="RUN!!!",command=run_voldy)
-
+all_buttons = [ron, harry, cedric, goblet_yes, goblet_no, hungarian, chinese, swedish, gilly, shark, bubble, mystery, left, right, expel,
+                   avis, patronus, dem_run, fight, vol_run]
 
 #make window appear
 top.mainloop()
