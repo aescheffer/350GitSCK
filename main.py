@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+from maze import *
+
 top = Tk()
 top.geometry("1000x700")
 top.title("Hammy Popper Demo")
@@ -35,6 +37,7 @@ def gob():
    goblet_yes.place(relx=0.55, rely=0.5, anchor=CENTER)
    goblet_no.place(relx=0.45, rely=0.5, anchor=CENTER)
    T.config(text="Will you place your name in the goblet of fire?")
+
 
 #if choose YES for goblet of fire, die
 def explode_by_gob():
@@ -100,8 +103,14 @@ def ron_and_frenchie():
    T.config(text="Great choice! The Gilly Weed gave you flippers, making you fast enough to save\n"
                  "Ron Weasley and a sickly french child. You move on to the maze! Before you enter,\n"
                  "will you pick the left or right path?")
-   left.place(relx=0.45, rely=0.5, anchor=CENTER)
-   right.place(relx=0.55, rely=0.5, anchor=CENTER)
+
+   if main() == 'l':
+       left.place(relx=0.45, rely=0.5, anchor=CENTER)
+   else:
+       right.place(relx=0.55, rely=0.5, anchor=CENTER)
+
+
+
 
 #if choose shark head spell, save hermione
 def hermione():
@@ -110,8 +119,11 @@ def hermione():
    T.config(text="The shark head spell gave you the confidence to rescue the brightest witch in your school:\n"
                  "Hermione Granger. She hints that \"the safe path doesn't always feel right.\" You have reached\n"
                  "the final challenge of the maze...which path will you choose?")
-   left.place(relx=0.45, rely=0.5, anchor=CENTER)
-   right.place(relx=0.55, rely=0.5, anchor=CENTER)
+
+   if main() == 'l':
+       left.place(relx=0.45, rely=0.5, anchor=CENTER)
+   else:
+       right.place(relx=0.55, rely=0.5, anchor=CENTER)
 
 #if choose bubble spell, save cho
 def cho():
