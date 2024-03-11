@@ -119,5 +119,3 @@ def main():
                 return choice.letter
 
         window.update()
-
-
