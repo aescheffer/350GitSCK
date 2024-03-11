@@ -36,18 +36,11 @@ class TestGame(unittest.TestCase):
 
         start = (c.xcor(), c.ycor())
         c.left()
-        end = (c.xcor(), c.ycor())
-
-        self.assertEqual(end, start)
-
-    def test_walls2(self):
-        main()
-
-        start = (c.xcor(), c.ycor())
         c.down()
         end = (c.xcor(), c.ycor())
 
         self.assertEqual(end, start)
+
 
 
 
