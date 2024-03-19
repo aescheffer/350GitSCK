@@ -26,7 +26,7 @@ def ron_death():
    ron.place_forget()
    harry.place_forget()
    cedric.place_forget()
-   T.config(text="bitch boy")
+   T.config(text="Ron is never the hero!! Try again.")
 
 
 #advance to goblet of fire if Cedric or Harry is chosen
