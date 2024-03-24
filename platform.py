@@ -2,24 +2,6 @@ import pygame
 from pygame.locals import *
 
 
-pygame.init()
-
-clock = pygame.time.Clock()
-fps = 60
-
-screen_width=750
-screen_height=750
-
-screen = pygame.display.set_mode((screen_width,screen_height))
-pygame.display.set_caption("Battle Voldemort")
-
-#game variables
-tile_size = 50
-
-#images
-sun_img = pygame.image.load('img/sunn.png')
-background_img = pygame.image.load('img/skyy.png')
-
 class Player():
     def __init__(self,x,y):
         img = pygame.image.load('img/wizard.png')
@@ -124,48 +106,68 @@ class Enemy(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.move_direction
 
-world_data = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,2,2,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-]
+if __name__ == '__main__':
+    pygame.init()
 
-player = Player(100, screen_height - 400)
+    clock = pygame.time.Clock()
+    fps = 60
 
-dementor_group = pygame.sprite.Group()
+    screen_width = 750
+    screen_height = 750
 
-world = World(world_data)
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Battle Voldemort")
 
-run = True
-while run:
+    # game variables
+    tile_size = 50
 
-    clock.tick(fps)
-    screen.blit(background_img,(0,0))
-    screen.blit(sun_img, (-500, -500))
+    # images
+    sun_img = pygame.image.load('img/sunn.png')
+    background_img = pygame.image.load('img/skyy.png')
 
-    world.draw()
+    world_data = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    ]
 
-    dementor_group.update()
-    dementor_group.draw(screen)
+    player = Player(100, screen_height - 400)
 
-    player.update()
+    dementor_group = pygame.sprite.Group()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+    world = World(world_data)
 
-    pygame.display.update()
+    run = True
+    while run:
 
-pygame.quit()
+        clock.tick(fps)
+        screen.blit(background_img, (0, 0))
+        screen.blit(sun_img, (-500, -500))
+
+        world.draw()
+
+        dementor_group.update()
+        dementor_group.draw(screen)
+
+        player.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+        pygame.display.update()
+
+    pygame.quit()
+
