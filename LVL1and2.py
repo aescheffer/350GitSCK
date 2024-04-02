@@ -278,6 +278,9 @@ class Character():
             if pygame.sprite.spritecollide(self, mermaid_group, False):
                 game_over = -1
 
+            if pygame.sprite.spritecollide(self, exit_group2, False):
+                game_over = 1
+
             self.rect.x += dx
             self.rect.y += dy
             #pygame.draw.rect(screen, "white", self.rect, width=1)
@@ -320,6 +323,10 @@ class World2():
                 if tile == 4:
                     mermaid = Mermaids3(ccount * tile_size+10, rcount * tile_size)
                     mermaid_group.add(mermaid)
+                if tile == 5:
+                    egg = Exit(ccount * tile_size, rcount * tile_size - (tile_size // 2))
+                    exit_group2.add(egg)
+
 
                 ccount += 1
             rcount += 1
@@ -444,7 +451,7 @@ if __name__ == '__main__':
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
         [1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]
 
@@ -453,6 +460,7 @@ if __name__ == '__main__':
 
     dementor_group = pygame.sprite.Group()
     exit_group = pygame.sprite.Group()
+    exit_group2 = pygame.sprite.Group()
     dragon_group = pygame.sprite.Group()
     egg_group = pygame.sprite.Group()
 
@@ -507,8 +515,13 @@ if __name__ == '__main__':
                 mermaid_group.update()
 
             mermaid_group.draw(screen)
+            exit_group2.draw(screen)
 
             game_over = character.update(game_over)
+
+            if game_over == 1:
+                level += 1
+                game_over = 0
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
