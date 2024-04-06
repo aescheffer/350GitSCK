@@ -127,7 +127,7 @@ class World():
         self.tile_list = []
 
         #load images
-        dirt_img = pygame.image.load('img/dirt.png')
+        dirt_img = pygame.image.load('img/stone.jpg')
 
         row_count = 0
         for row in data:
@@ -414,7 +414,7 @@ if __name__ == '__main__':
 
     # images
     sun_img = pygame.image.load('img/sunn.png')
-    background_img1 = pygame.image.load('img/skyy.png')
+    background_img1 = pygame.image.load('img/arena3.jpg')
     background_img2 = pygame.transform.scale(pygame.image.load('img/underwaterBG.jpg'), (750, 750))
 
 
@@ -481,7 +481,7 @@ if __name__ == '__main__':
         clock.tick(fps)
         if level == 0:
             screen.blit(background_img1, (0, 0))
-            screen.blit(sun_img, (-500, -500))
+            #screen.blit(sun_img, (-500, -500))
 
             world.draw()
 
