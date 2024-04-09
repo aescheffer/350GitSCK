@@ -32,14 +32,14 @@ class Player():
         if game_over == 0:
             #get keypresses
             key = pygame.key.get_pressed()
-            if key[pygame.K_SPACE] and self.jumped == False and self.in_air == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False and self.in_air == False:
                 self.vel_y = -15
                 self.jumped = True
-            if key[pygame.K_SPACE] == False:
+            if (key[pygame.K_SPACE] == False) or (key[pygame.K_w] == False):
                 self.jumped = False
-            if key[pygame.K_LEFT]:
+            if (key[pygame.K_LEFT] or key[pygame.K_a]):
                 dx -= 5
-            if key[pygame.K_RIGHT]:
+            if (key[pygame.K_RIGHT] or key[pygame.K_d]):
                 dx += 5
 
             #add gravity
@@ -717,7 +717,9 @@ if __name__ == '__main__':
         clock.tick(fps)
 
         if level == -1:
+            mono = pygame.image.load('img/mono2.png')
             screen.blit(background_img1, (0, 0))
+            screen.blit(mono, (35,190))
             game_over = start.update(game_over)
             if game_over == 1:
                 level += 1
