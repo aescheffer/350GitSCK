@@ -587,6 +587,28 @@ class Enemy2(pygame.sprite.Sprite):
 
 
 
+
+
+class Start:
+    def __init__(self):
+        pass
+
+    def update(self, game_over):
+        key = pygame.key.get_pressed()
+        if key[pygame.K_SPACE]:
+            game_over = 1
+
+        return game_over
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     pygame.init()
 
@@ -602,11 +624,10 @@ if __name__ == '__main__':
     # game variables
     tile_size = 50
     game_over = 0
-    level = 0
+    level = -1
     max_levels = 2
 
     # images
-    sun_img = pygame.image.load('img/sunn.png')
     background_img1 = pygame.image.load('img/arena3.jpg')
     background_img2 = pygame.transform.scale(pygame.image.load('img/underwaterBG.jpg'), (750, 750))
     background_img3 = pygame.transform.scale(pygame.image.load('img/foggy_night.png'), (750, 750))
@@ -688,13 +709,21 @@ if __name__ == '__main__':
     world3 = World3(LVL3)
     player3 = Player3(100, screen_height - 130)
 
-
+    start = Start()
 
 
     run = True
     while run:
         clock.tick(fps)
-        if level == 0:
+
+        if level == -1:
+            screen.blit(background_img1, (0, 0))
+            game_over = start.update(game_over)
+            if game_over == 1:
+                level += 1
+                game_over = 0
+
+        elif level == 0:
             screen.blit(background_img1, (0, 0))
             #screen.blit(sun_img, (-500, -500))
 
