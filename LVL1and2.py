@@ -1,15 +1,5 @@
 import pygame
 from pygame.locals import *
-
-def reset_level(level):
-    player.reset(100, screen_height-100)
-    dementor_group.empty()
-    dragon_group.empty()
-    exit_group.empty()
-    worlds = [LVL1, LVL2]
-    world = World(worlds[level])
-    return world
-
 class Player():
     def __init__(self,x,y):
         img = pygame.image.load('img/wizard.png')
@@ -149,9 +139,6 @@ class World():
                 if tile == 4:
                     dragon = Dragon(col_count * tile_size, row_count * tile_size)
                     dragon_group.add(dragon)
-                if tile == 5:
-                    egg = Exit(col_count * tile_size, row_count * tile_size - (tile_size // 2))
-                    egg_group.add(egg)
                 col_count += 1
             row_count += 1
 
@@ -211,18 +198,6 @@ class Exit(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-
-class Egg(pygame.sprite.Sprite):
-    def __init__(self,x,y):
-        pygame.sprite.Sprite.__init__(self)
-        img = pygame.image.load('img/egg.png')
-        self.image = pygame.transform.scale(img, (tile_size, int(tile_size*1.5)))
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-
-
 
 
 
