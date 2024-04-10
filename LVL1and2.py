@@ -304,6 +304,18 @@ class Player2():
         screen.blit(self.img, self.rect)
         return game_over
 
+    def reset(self, x, y):
+        img = pygame.image.load('img/wizard.png')
+        self.deadimg = pygame.transform.scale(pygame.image.load('img/ghost.png'), (40,70))
+        self.img = pygame.transform.scale(img, (40, 70))
+        self.rect = self.img.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.vely = 0
+        self.jump = False
+        self.width = self.img.get_width()
+        self.height = self.img.get_height()
+
 
 
 
@@ -508,6 +520,20 @@ class Player3():
 
         return game_over
 
+    def reset(self, x, y):
+        img = pygame.image.load('img/wizard.png')
+        self.image = pygame.transform.scale(img, (40,80))
+        dead_image = pygame.image.load('img/ghost.png')
+        self.dead_image = pygame.transform.scale(dead_image, (40,80))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+        #y velocity
+        self.vel_y = 0
+        self.jumped = False
+
 
 class World3():
     def __init__(self, data):
@@ -710,6 +736,9 @@ if __name__ == '__main__':
     player3 = Player3(100, screen_height - 130)
 
     start = Start()
+    restart_img = pygame.image.load('img/restart_img.png')
+    from ButtonClass import Button
+    restart_button = Button(100, 100, restart_img)
 
 
     run = True
@@ -752,6 +781,12 @@ if __name__ == '__main__':
                     winImg = pygame.transform.scale(winImg, (300, 300))
                     screen.blit(winImg, (225, 250))
 
+            if game_over == -1:
+                if restart_button.draw(screen):
+                    level = -1
+                    player.reset(100, screen_height - 200)
+                    game_over = 0
+
         elif level == 1:
             screen.blit(background_img2, (0, 0))
 
@@ -769,6 +804,13 @@ if __name__ == '__main__':
                 level += 1
                 game_over = 0
 
+            if game_over == -1:
+                if restart_button.draw(screen):
+                    level = -1
+                    player.reset(100, screen_height - 200)
+                    character.reset(50, 600)
+                    game_over = 0
+
         elif level == 2:
             screen.blit(background_img3, (0, 0))
 
@@ -781,6 +823,14 @@ if __name__ == '__main__':
             exit_group3.draw(screen)
 
             game_over = player3.update(game_over)
+
+            if game_over == -1:
+                if restart_button.draw(screen):
+                    level = -1
+                    player.reset(100, screen_height - 200)
+                    character.reset(50, 600)
+                    player3.reset(100, screen_height - 130)
+                    game_over = 0
 
 
 
