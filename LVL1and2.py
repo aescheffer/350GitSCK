@@ -208,9 +208,9 @@ class Exit(pygame.sprite.Sprite):
 
 class Player2():
     def __init__(self, x, y):
-        img = pygame.image.load('img/wizard.png')
+        img = pygame.image.load('img/scuba_man.png')
         self.deadimg = pygame.transform.scale(pygame.image.load('img/ghost.png'), (40,70))
-        self.img = pygame.transform.scale(img, (40, 70))
+        self.img = pygame.transform.scale(img, (60, 70))
         self.rect = self.img.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -229,8 +229,12 @@ class Player2():
             key = pygame.key.get_pressed()
             if key[pygame.K_LEFT]:
                 dx -= 5
+                right = pygame.image.load('img/scuba_right.png')
+                self.img = pygame.transform.scale(right, (60, 70))
             if key[pygame.K_RIGHT]:
                 dx += 5
+                left = pygame.image.load('img/scuba_man.png')
+                self.img = pygame.transform.scale(left, (60, 70))
             if key[pygame.K_SPACE] and self.jump == False:
                 self.vely = -10
                 self.jump = True
