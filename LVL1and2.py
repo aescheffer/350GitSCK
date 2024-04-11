@@ -24,8 +24,12 @@ class Player():
                 self.jumped = False
             if (key[pygame.K_LEFT] or key[pygame.K_a]):
                 dx -= 5
+                left = pygame.image.load('img/knight_left.png')
+                self.image = pygame.transform.scale(left, (40, 80))
             if (key[pygame.K_RIGHT] or key[pygame.K_d]):
                 dx += 5
+                right = pygame.image.load('img/knighty.png')
+                self.image = pygame.transform.scale(right, (40, 80))
 
             #add gravity
             self.vel_y += 1
@@ -79,7 +83,7 @@ class Player():
 
     #reset character position and image if restart button is pressed
     def reset(self,x,y):
-        img = pygame.image.load('img/wizard.png')
+        img = pygame.image.load('img/knighty.png')
         dead_image = pygame.image.load('img/ghost.png')
         self.image = pygame.transform.scale(img, (40, 80))
         self.dead_image = pygame.transform.scale(dead_image, (40, 80))
