@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-#first level character is a wizard
+#Player class, there are three objects each representing the player at the three levels
 class Player():
     def __init__(self,x,y,img,scale):
         self.reset(x,y,img,scale)
@@ -17,11 +17,13 @@ class Player():
         if game_over == 0:
             #get keypresses
             key = pygame.key.get_pressed()
+            #space bar used to jump--temporarily changes y-pos of player, can only be pressed once before gravity
             if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False and self.in_air == False:
                 self.vel_y = -15
                 self.jumped = True
             if (key[pygame.K_SPACE] == False) or (key[pygame.K_w] == False):
                 self.jumped = False
+            #image to move left and right changes so player avatar is facing the right way
             if (key[pygame.K_LEFT] or key[pygame.K_a]):
                 dx -= 5
                 left = pygame.image.load('img/knight_left.png')
@@ -56,7 +58,6 @@ class Player():
                         self.in_air = False
 
             #check for collision with enemies
-
             if pygame.sprite.spritecollide(self, dragon_group, False):
                 game_over = -1
 
@@ -64,23 +65,23 @@ class Player():
             if pygame.sprite.spritecollide(self, exit_group, False):
                 game_over = 1
 
-
-
-            #update player cord.
+            #update player coordinates
             self.rect.x += dx
             self.rect.y += dy
 
-        #if the player dies, change image to ghost and stop the game
+        #if the player dies, change image to ghost that floats upward and stop the game
         elif game_over == -1:
             self.image = self.dead_image
             if self.rect.y > 200:
                 self.rect.y -= 5
 
-        #draw wizard
+        #draw wizard for each update based on changes in x and y
         screen.blit(self.image, self.rect)
 
         return game_over
 
+    #player move rules for level 2 (player can jump infinitely upward but slowly to simulate
+    #water environment
     def update2(self, game_over):
         #changes in x and y position depending on player input (keys pressed)
         dx = 0
@@ -89,6 +90,7 @@ class Player():
         if game_over == 0:
             #get pressed keys
             key = pygame.key.get_pressed()
+            #player avatar image changes to face where the user is directing them with arrow keys
             if key[pygame.K_LEFT]:
                 dx -= 5
                 right = pygame.image.load('img/scuba_right.png')
@@ -97,13 +99,14 @@ class Player():
                 dx += 5
                 left = pygame.image.load('img/scuba_man.png')
                 self.img = pygame.transform.scale(left, (60, 70))
+            #player can jump infititely vertical
             if key[pygame.K_SPACE] and self.jumped == False:
                 self.vel_y = -10
                 self.jumped = True
             if key[pygame.K_SPACE] == False:
                 self.jumped = False
 
-            #make gravity
+            #make gravity (heavier for lvl 2)
             self.vel_y += 1
             if self.vel_y > 3:
                 self.vel_y = 3
@@ -133,12 +136,12 @@ class Player():
             if pygame.sprite.spritecollide(self, exit_group2, False):
                 game_over = 1
 
-            #add x and y position changes to ending character location
+            #add x and y position changes to ending player location
             self.rect.x += dx
             self.rect.y += dy
             #pygame.draw.rect(screen, "white", self.rect, width=1)
 
-        #if the game is over, change character image to ghost and stop the game
+        #if the game is over, change player image to ghost and stop the game
         elif game_over == -1:
             self.img = self.dead_image
             if self.rect.y > 100:
@@ -146,8 +149,10 @@ class Player():
 
         #draw player onto the screen
         screen.blit(self.img, self.rect)
+
         return game_over
 
+    #rules for level 3 player movement
     def update3(self, game_over):
         #calculate new player position
         #check collision at new position
@@ -196,6 +201,7 @@ class Player():
             #check for collision with enemies
             if pygame.sprite.spritecollide(self, bad_group, False):
                 game_over = -1
+            #if player wins and collides with object of exit class, game is finished
             if pygame.sprite.spritecollide(self, exit_group3, False):
                 game_over = 1
 
@@ -220,8 +226,6 @@ class Player():
             winImg = pygame.transform.scale(winImg, (300, 300))
             screen.blit(winImg, (225, 250))
 
-
-
         #draw player onto screen
         screen.blit(self.image, self.rect)
         #pygame.draw.rect(screen, (255,255,255), self.rect, 2)
@@ -229,9 +233,9 @@ class Player():
         return game_over
 
 
-    #reset character position and image if restart button is pressed
+    #reset player position, image, and scale if restart button is pressed
+    #applicable for players at all 3 levels
     def reset(self,x,y, img, scale):
-        # img = pygame.image.load('img/knighty.png')
         dead_image = pygame.image.load('img/ghost.png')
         self.image = pygame.transform.scale(img, scale)
         self.dead_image = pygame.transform.scale(dead_image, (40, 80))
@@ -243,7 +247,6 @@ class Player():
         self.vel_y = 0
         self.jumped = False
         self.in_air = True
-
 
 
 
@@ -327,8 +330,6 @@ class Exit(pygame.sprite.Sprite):
 
 
 '''NEW MAP CLASSES FOR LEVEL 2'''
-
-
 
 #second level world creation
 class World2():
@@ -436,8 +437,6 @@ class Mermaids3(pygame.sprite.Sprite):
 
 '''NEW MAP CLASSES FOR LEVEL 3'''
 
-
-
 #third and final world creation
 class World3():
     def __init__(self, data):
@@ -449,7 +448,7 @@ class World3():
         for row in data:
             col_count = 0
             for tile in row:
-                #create dirt
+                #create and place dirt and enemies
                 if tile == 1:
                     img = pygame.transform.scale(dirt_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
@@ -473,6 +472,7 @@ class World3():
                 col_count += 1
             row_count += 1
 
+    #draw world onto the screen
     def draw(self):
         for tile in self.tile_list:
             #takes picture and puts it in the location of rect coordinates
@@ -564,7 +564,8 @@ if __name__ == '__main__':
     level = -1
     max_levels = 2
 
-    # images to load in
+    # images to load in...
+    #player images
     img1 = pygame.image.load('img/knighty.png')
     scale1 = (40,80)
     img2 = pygame.image.load('img/scuba_man.png')
@@ -573,10 +574,11 @@ if __name__ == '__main__':
     scale3 = (40,70)
 
 
-
+    #background images for all levels
     background_img1 = pygame.image.load('img/arena3.jpg')
     background_img2 = pygame.transform.scale(pygame.image.load('img/underwaterBG.jpg'), (750, 750))
     background_img3 = pygame.transform.scale(pygame.image.load('img/foggy_night.png'), (750, 750))
+    #restart button image
     restart_img = pygame.image.load('img/restart_img.png')
 
 
@@ -638,7 +640,7 @@ if __name__ == '__main__':
     #first level player
     player = Player(100, screen_height - 400, img1, scale1)
 
-    character = Player(50, 600, img2, scale2)
+    player2 = Player(50, 600, img2, scale2)
 
     player3 = Player(100, screen_height - 130, img3, scale3)
 
@@ -669,7 +671,9 @@ if __name__ == '__main__':
     while run:
         clock.tick(fps)
 
+        #checks if level is starting screen
         if level == -1:
+            #loads in initial greeting and background image
             mono = pygame.image.load('img/mono2.png')
             screen.blit(background_img1, (0, 0))
             screen.blit(mono, (35,190))
@@ -678,11 +682,13 @@ if __name__ == '__main__':
                 level += 1
                 game_over = 0
 
+        #checks if level is lvl1
         elif level == 0:
+            #load in lvl1 pictures and world
             screen.blit(background_img1, (0, 0))
-
             world.draw()
 
+            #if the game is still going--player has not won or died
             if game_over == 0:
                 dragon_group.update()
 
@@ -691,52 +697,58 @@ if __name__ == '__main__':
 
             game_over = player.update1(game_over)
 
+            #if the player wins, update the level, if on level 3, print winning message
             if game_over == 1:
                 level += 1
                 if level <= max_levels:
-                    #worlds = []
-                    #world = reset_level(level)
                     game_over = 0
                 else:
                     winImg = pygame.image.load('img/youwin.jpg')
                     winImg = pygame.transform.scale(winImg, (300, 300))
                     screen.blit(winImg, (225, 250))
 
+            #if player dies, end game, reset player positions, and give them restart option
             if game_over == -1:
                 if restart_button.draw(screen):
                     level = -1
                     player.reset(100, screen_height - 200, img1, scale1)
                     game_over = 0
 
+        #checks if level is the second level
         elif level == 1:
+            #loads in lvl2 world and pictures
             screen.blit(background_img2, (0, 0))
-
             world2.draw()
 
+            #if player has not died or won... update object positions
             if game_over == 0:
                 mermaid_group.update()
 
             mermaid_group.draw(screen)
             exit_group2.draw(screen)
 
-            game_over = character.update2(game_over)
+            game_over = player2.update2(game_over)
 
+            #if player wins, move on to next level
             if game_over == 1:
                 level += 1
                 game_over = 0
 
+            #if player dies, end game, reset player positions and give them restart option
             if game_over == -1:
                 if restart_button.draw(screen):
                     level = -1
                     player.reset(100, screen_height - 200, img1, scale1)
-                    character.reset(50, 600, img2, scale2)
+                    player2.reset(50, 600, img2, scale2)
                     game_over = 0
 
+        #if third and final level...
         elif level == 2:
+            #draw in lvl 3 pictures and world
             screen.blit(background_img3, (0, 0))
-
             world3.draw()
 
+            #if player has not died or won, update object positions
             if game_over == 0:
                 bad_group.update()
 
@@ -745,20 +757,23 @@ if __name__ == '__main__':
 
             game_over = player3.update3(game_over)
 
+            #if player dies, end game, reset player positions and give them restart option
             if game_over == -1:
                 if restart_button.draw(screen):
                     level = -1
                     player.reset(100, screen_height - 200, img1, scale1)
-                    character.reset(50, 600, img2, scale2)
+                    player2.reset(50, 600, img2, scale2)
                     player3.reset(100, screen_height - 130, img3, scale3)
                     game_over = 0
 
 
-
+        #execute all events while game is running, if X is clicked on screen, close window
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
+        #update the display screen
         pygame.display.update()
 
+    #close window and game
     pygame.quit()
