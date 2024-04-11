@@ -81,10 +81,10 @@ class Player():
             self.image = self.dead_image
             if self.rect.y > 200:
                 self.rect.y -= 5
-            else:
-                gameOverImg = pygame.image.load('img/gameover.jpg')
-                gameOverImg = pygame.transform.scale(gameOverImg,(300,300))
-                screen.blit(gameOverImg, (225,300))
+            # else:
+            #     gameOverImg = pygame.image.load('img/gameover.jpg')
+            #     gameOverImg = pygame.transform.scale(gameOverImg,(300,300))
+            #     screen.blit(gameOverImg, (225,300))
 
 
         # elif game_over == 1:
