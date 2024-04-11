@@ -52,8 +52,6 @@ class Player():
                         self.in_air = False
 
             #check for collision with enemies
-            if pygame.sprite.spritecollide(self, dementor_group, False):
-                game_over = -1
 
             if pygame.sprite.spritecollide(self, dragon_group, False):
                 game_over = -1
@@ -115,9 +113,6 @@ class World():
                     img_rect.y = row_count * tile_size
                     tile = (img, img_rect)
                     self.tile_list.append(tile)
-                if tile == 2:
-                    dementor = Enemy(col_count * tile_size, row_count * tile_size)
-                    dementor_group.add(dementor)
                 if tile == 3:
                     exit = Exit(col_count * tile_size, row_count * tile_size - (tile_size//2))
                     exit_group.add(exit)
@@ -132,24 +127,7 @@ class World():
         for tile in self.tile_list:
             screen.blit(tile[0],tile[1])
 
-#enemy class that causes game over if player collides with it
-# class Enemy(pygame.sprite.Sprite):
-#     def __init__(self,x,y):
-#         pygame.sprite.Sprite.__init__(self)
-#         self.image = pygame.image.load('img/dementor.png')
-#         self.image = pygame.transform.scale(self.image, (40, 80))
-#         self.rect = self.image.get_rect()
-#         self.rect.x = x
-#         self.rect.y = y
-#         self.move_direction = 1
-#         self.move_counter = 0
-#
-#     def update(self):
-#         self.rect.x += self.move_direction
-#         self.move_counter += 1
-#         if abs(self.move_counter) > 50:
-#             self.move_direction *= -1
-#             self.move_counter *= -1
+
 
 #dictates how the Dragon enemy moves--will end game if player and dragon collide
 class Dragon(pygame.sprite.Sprite):
@@ -729,7 +707,6 @@ if __name__ == '__main__':
             if game_over == 0:
                 dragon_group.update()
 
-            dementor_group.draw(screen)
             dragon_group.draw(screen)
             exit_group.draw(screen)
 
