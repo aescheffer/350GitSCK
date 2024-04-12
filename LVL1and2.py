@@ -94,11 +94,11 @@ class Player():
             if key[pygame.K_LEFT]:
                 dx -= 5
                 right = pygame.image.load('img/scuba_right.png')
-                self.img = pygame.transform.scale(right, (60, 70))
+                self.image = pygame.transform.scale(right, (60, 70))
             if key[pygame.K_RIGHT]:
                 dx += 5
                 left = pygame.image.load('img/scuba_man.png')
-                self.img = pygame.transform.scale(left, (60, 70))
+                self.image = pygame.transform.scale(left, (60, 70))
             #player can jump infititely vertical
             if key[pygame.K_SPACE] and self.jumped == False:
                 self.vel_y = -10
@@ -143,12 +143,12 @@ class Player():
 
         #if the game is over, change player image to ghost and stop the game
         elif game_over == -1:
-            self.img = self.dead_image
+            self.image = self.dead_image
             if self.rect.y > 100:
                 self.rect.y -= 3
 
         #draw player onto the screen
-        screen.blit(self.img, self.rect)
+        screen.blit(self.image, self.rect)
 
         return game_over
 
@@ -563,6 +563,7 @@ if __name__ == '__main__':
     game_over = 0
     level = -1
     max_levels = 2
+    tracker = 1
 
     # images to load in...
     #player images
@@ -682,6 +683,25 @@ if __name__ == '__main__':
                 level += 1
                 game_over = 0
 
+        if level == -2:
+            #loads in initial greeting and background image
+            mono = pygame.image.load('img/mono2.png')
+            screen.blit(background_img1, (0, 0))
+            screen.blit(mono, (35,190))
+            game_over = start.update(game_over)
+            if game_over == 1:
+                level = 1
+                game_over = 0
+        if level == -3:
+            #loads in initial greeting and background image
+            mono = pygame.image.load('img/mono2.png')
+            screen.blit(background_img1, (0, 0))
+            screen.blit(mono, (35,190))
+            game_over = start.update(game_over)
+            if game_over == 1:
+                level = 2
+                game_over = 0
+
         #checks if level is lvl1
         elif level == 0:
             #load in lvl1 pictures and world
@@ -699,7 +719,7 @@ if __name__ == '__main__':
 
             #if the player wins, update the level, if on level 3, print winning message
             if game_over == 1:
-                level += 1
+                level = -2
                 if level <= max_levels:
                     game_over = 0
                 else:
@@ -731,7 +751,7 @@ if __name__ == '__main__':
 
             #if player wins, move on to next level
             if game_over == 1:
-                level += 1
+                level = -3
                 game_over = 0
 
             #if player dies, end game, reset player positions and give them restart option
