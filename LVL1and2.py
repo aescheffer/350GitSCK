@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from ButtonClass import Button
 
 #Player class, there are three objects each representing the player at the three levels
 class Player():
@@ -94,11 +95,11 @@ class Player():
             if key[pygame.K_LEFT]:
                 dx -= 5
                 right = pygame.image.load('img/scuba_right.png')
-                self.image = pygame.transform.scale(right, (60, 70))
+                self.image = pygame.transform.scale(right, (40, 70))
             if key[pygame.K_RIGHT]:
                 dx += 5
                 left = pygame.image.load('img/scuba_man.png')
-                self.image = pygame.transform.scale(left, (60, 70))
+                self.image = pygame.transform.scale(left, (40, 70))
             #player can jump infititely vertical
             if key[pygame.K_SPACE] and self.jumped == False:
                 self.vel_y = -10
@@ -664,7 +665,6 @@ if __name__ == '__main__':
 
     start = Start()
     # restart_img = pygame.image.load('img/restart_img.png')
-    from ButtonClass import Button
     restart_button = Button(100, 100, restart_img)
 
 
