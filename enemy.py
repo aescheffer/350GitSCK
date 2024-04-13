@@ -1,3 +1,11 @@
+import pygame
+from pygame.locals import *
+from ButtonClass import Button
+
+# dragon_group = pygame.sprite.Group()
+# mermaid_group = pygame.sprite.Group()
+# bad_group = pygame.sprite.Group()
+
 
 #dictates how the Dragon enemy moves--will end game if player and dragon collide
 class Dragon(pygame.sprite.Sprite):
@@ -28,7 +36,7 @@ class Dragon(pygame.sprite.Sprite):
             self.move_counter *= -1
             self.checker *= -1
         #boundary rectangle to show player where they cannot go
-        pygame.draw.rect(screen, "white", self.rect, width=1)
+        #pygame.draw.rect(screen, "white", self.rect, width=1)
 
 
 #first enemy group that will cause game over for player2

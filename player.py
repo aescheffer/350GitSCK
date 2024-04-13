@@ -1,11 +1,23 @@
+
 import pygame
 from pygame.locals import *
 from ButtonClass import Button
 
+# dragon_group = pygame.sprite.Group()
+# mermaid_group = pygame.sprite.Group()
+# bad_group = pygame.sprite.Group()
+# exit_group = pygame.sprite.Group()
+# exit_group2 = pygame.sprite.Group()
+# exit_group3 = pygame.sprite.Group()
+screen = pygame.display.set_mode((750, 750))
+
 #Player class, there are three objects each representing the player at the three levels
 class Player():
-    def __init__(self,x,y,img,scale):
+    def __init__(self,x,y,img,scale,world,dragon_group,exit_group):
         self.reset(x,y,img,scale)
+        self.world = world
+        self.dragon_group = dragon_group
+        self.exit_group = exit_group
 
     #method to allow player to move around and have consequences for collisions with
     #world and enemies
@@ -42,7 +54,7 @@ class Player():
 
             #check for collision
             self.in_air = True
-            for tile in world.tile_list:
+            for tile in self.world.tile_list:
                 #check for coll in x
                 if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
                     dx = 0
@@ -59,11 +71,11 @@ class Player():
                         self.in_air = False
 
             #check for collision with enemies
-            if pygame.sprite.spritecollide(self, dragon_group, False):
+            if pygame.sprite.spritecollide(self, self.dragon_group, False):
                 game_over = -1
 
             #collision with cup
-            if pygame.sprite.spritecollide(self, exit_group, False):
+            if pygame.sprite.spritecollide(self, self.exit_group, False):
                 game_over = 1
 
             #update player coordinates
@@ -92,19 +104,19 @@ class Player():
             #get pressed keys
             key = pygame.key.get_pressed()
             #player avatar image changes to face where the user is directing them with arrow keys
-            if key[pygame.K_LEFT]:
+            if (key[pygame.K_LEFT] or key[pygame.K_a]):
                 dx -= 5
                 right = pygame.image.load('img/scuba_right.png')
                 self.image = pygame.transform.scale(right, (40, 70))
-            if key[pygame.K_RIGHT]:
+            if (key[pygame.K_RIGHT] or key[pygame.K_d]):
                 dx += 5
                 left = pygame.image.load('img/scuba_man.png')
                 self.image = pygame.transform.scale(left, (40, 70))
             #player can jump infititely vertical
-            if key[pygame.K_SPACE] and self.jumped == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False:
                 self.vel_y = -10
                 self.jumped = True
-            if key[pygame.K_SPACE] == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w]) == False:
                 self.jumped = False
 
             #make gravity (heavier for lvl 2)
@@ -114,7 +126,7 @@ class Player():
             dy += self.vel_y
 
             #checking for collision
-            for tile in world2.tileList:
+            for tile in self.world.tileList:
                 #x direction
                 if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
                     dx = 0
@@ -130,11 +142,11 @@ class Player():
                         self.vel_y = 0
 
             #check mermaid collision
-            if pygame.sprite.spritecollide(self, mermaid_group, False):
+            if pygame.sprite.spritecollide(self, self.dragon_group, False):
                 game_over = -1
 
             #check collision with second mermaid enemy group
-            if pygame.sprite.spritecollide(self, exit_group2, False):
+            if pygame.sprite.spritecollide(self, self.exit_group, False):
                 game_over = 1
 
             #add x and y position changes to ending player location
@@ -166,15 +178,15 @@ class Player():
 
             #get keypresses
             key = pygame.key.get_pressed()
-            if key[pygame.K_SPACE] and self.jumped == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False:
                 self.vel_y = -15
                 self.jumped = True
             #set jumped back to false
-            if key[pygame.K_SPACE] == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w]) == False:
                 self.jumped = False
-            if key[pygame.K_LEFT]:
+            if (key[pygame.K_LEFT] or key[pygame.K_a]):
                 dx -= 5
-            if key[pygame.K_RIGHT]:
+            if (key[pygame.K_RIGHT] or key[pygame.K_d]):
                 dx += 5
 
             #add gravity
@@ -184,7 +196,7 @@ class Player():
             dy += self.vel_y
 
             #check for collision
-            for tile in world3.tile_list:
+            for tile in self.world.tile_list:
                 #check for collision in x direction
                 if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
                     dx = 0
@@ -200,10 +212,10 @@ class Player():
                         dy = tile[1].top - self.rect.bottom
                         self.vel_y = 0
             #check for collision with enemies
-            if pygame.sprite.spritecollide(self, bad_group, False):
+            if pygame.sprite.spritecollide(self, self.dragon_group, False):
                 game_over = -1
             #if player wins and collides with object of exit class, game is finished
-            if pygame.sprite.spritecollide(self, exit_group3, False):
+            if pygame.sprite.spritecollide(self, self.exit_group, False):
                 game_over = 1
 
             #update player coordinates

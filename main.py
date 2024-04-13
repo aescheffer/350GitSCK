@@ -28,7 +28,6 @@ def main():
     game_over = 0
     level = -1
     max_levels = 2
-    tracker = 1
 
     # images to load in...
     #player images
@@ -103,28 +102,40 @@ def main():
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]
 
-    #first level player
-    player = Player(100, screen_height - 400, img1, scale1)
-
-    player2 = Player(50, 600, img2, scale2)
-
-    player3 = Player(100, screen_height - 130, img3, scale3)
-
+    #Initializing all the exit and enemy groups
     exit_group = pygame.sprite.Group()
-    exit_group2 = pygame.sprite.Group()
     dragon_group = pygame.sprite.Group()
-    egg_group = pygame.sprite.Group()
-
-    worlds = [LVL1, LVL2, LVL3]
-    world = World(LVL1)
-
+    exit_group2 = pygame.sprite.Group()
     mermaid_group = pygame.sprite.Group()
-    world2= World2(LVL2)
-
-
     bad_group = pygame.sprite.Group()
     exit_group3 = pygame.sprite.Group()
-    world3 = World3(LVL3)
+
+    #setting up the worlds
+    world = World(LVL1,exit_group,dragon_group)
+    world2 = World2(LVL2, exit_group2, mermaid_group)
+    world3 = World3(LVL3, exit_group3, bad_group)
+
+    #setting up the characters
+    player = Player(100, screen_height - 400, img1, scale1, world,dragon_group,exit_group)
+
+    player2 = Player(50, 600, img2, scale2, world2, mermaid_group, exit_group2)
+
+    player3 = Player(100, screen_height - 130, img3, scale3, world3, bad_group, exit_group3)
+
+    # exit_group = pygame.sprite.Group()
+    # exit_group2 = pygame.sprite.Group()
+    # dragon_group = pygame.sprite.Group()
+
+    #worlds = [LVL1, LVL2, LVL3]
+    # world = World(LVL1)
+
+    # mermaid_group = pygame.sprite.Group()
+    # world2= World2(LVL2)
+
+
+    # bad_group = pygame.sprite.Group()
+    # exit_group3 = pygame.sprite.Group()
+    # world3 = World3(LVL3)
 
 
     start = Start()
@@ -139,7 +150,7 @@ def main():
         #checks if level is starting screen
         if level == -1:
             #loads in initial greeting and background image
-            mono = pygame.image.load('img/mono2.png')
+            mono = pygame.image.load('img/monoLVL1.png')
             screen.blit(background_img1, (0, 0))
             screen.blit(mono, (35,190))
             game_over = start.update(game_over)
@@ -149,7 +160,7 @@ def main():
 
         if level == -2:
             #loads in initial greeting and background image
-            mono = pygame.image.load('img/mono2.png')
+            mono = pygame.image.load('img/monoLVL2.png')
             screen.blit(background_img1, (0, 0))
             screen.blit(mono, (35,190))
             game_over = start.update(game_over)
@@ -158,7 +169,7 @@ def main():
                 game_over = 0
         if level == -3:
             #loads in initial greeting and background image
-            mono = pygame.image.load('img/mono2.png')
+            mono = pygame.image.load('img/monoLVL3.png')
             screen.blit(background_img1, (0, 0))
             screen.blit(mono, (35,190))
             game_over = start.update(game_over)

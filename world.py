@@ -1,11 +1,26 @@
+import pygame
+from pygame.locals import *
+from ButtonClass import Button
+
+from enemy import *
+
 #first level world creation class
+# dragon_group = pygame.sprite.Group()
+# mermaid_group = pygame.sprite.Group()
+# bad_group = pygame.sprite.Group()
+# exit_group = pygame.sprite.Group()
+# exit_group2 = pygame.sprite.Group()
+# exit_group3 = pygame.sprite.Group()
+screen = pygame.display.set_mode((750, 750))
+
 class World():
-    def __init__(self,data):
+    def __init__(self,data,exit_group,dragon_group):
         self.tile_list = []
 
         #load images
         dirt_img = pygame.image.load('img/stone.jpg')
-
+        
+        tile_size = 50
         row_count = 0
         for row in data:
             col_count = 0
@@ -36,12 +51,12 @@ class World():
 
 #second level world creation
 class World2():
-    def __init__(self, data):
+    def __init__(self, data, exit_group2, mermaid_group):
         self.tileList = []
 
         #load image
         wall_img = pygame.image.load('img/underwaterWalls.jpg')
-
+        tile_size =50
         rcount = 0
         for row in data:
             ccount = 0
@@ -78,11 +93,11 @@ class World2():
 
 #third and final world creation
 class World3():
-    def __init__(self, data):
+    def __init__(self, data, exit_group3, bad_group):
         self.tile_list = []
         #load images
         dirt_img = pygame.image.load('img/hedges.png')
-
+        tile_size = 50
         row_count = 0
         for row in data:
             col_count = 0
@@ -121,6 +136,7 @@ class Exit(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('img/trophy.png')
+        tile_size = 50
         self.image = pygame.transform.scale(img, (tile_size, int(tile_size*1.5)))
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -137,7 +153,7 @@ class Start:
     #updates game over variable depending on if space bar is pressed by user
     def update(self, game_over):
         key = pygame.key.get_pressed()
-        if key[pygame.K_SPACE]:
+        if key[pygame.K_c]:
             game_over = 1
 
         return game_over
