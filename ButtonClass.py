@@ -29,15 +29,5 @@ class Button():
 
         return action
 
-    def move(self, x, y):
-        self.rect.topleft = (x,y)
 
-    def remove(self):
-        self.visible = False
-
-    #passes list of buttons to remove and moves button of choise
-    def move_and_remove(self, loser_list):
-        for option in loser_list:
-            option.remove()
-        self.move(320,200)
 
