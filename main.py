@@ -197,10 +197,6 @@ def main():
                 level = -2
                 if level <= max_levels:
                     game_over = 0
-                else:
-                    winImg = pygame.image.load('img/youwin.jpg')
-                    winImg = pygame.transform.scale(winImg, (300, 300))
-                    screen.blit(winImg, (225, 250))
 
             #if player dies, end game, reset player positions, and give them restart option
             if game_over == -1:
