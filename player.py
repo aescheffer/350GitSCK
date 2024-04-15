@@ -31,10 +31,10 @@ class Player():
             #get keypresses
             key = pygame.key.get_pressed()
             #space bar used to jump--temporarily changes y-pos of player, can only be pressed once before gravity
-            if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False and self.in_air == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w] or key[pygame.K_UP]) and self.jumped == False and self.in_air == False:
                 self.vel_y = -15
                 self.jumped = True
-            if (key[pygame.K_SPACE] == False) or (key[pygame.K_w] == False):
+            if (key[pygame.K_SPACE] == False) or (key[pygame.K_w] == False) or (key[pygame.K_UP] == False):
                 self.jumped = False
             #image to move left and right changes so player avatar is facing the right way
             if (key[pygame.K_LEFT] or key[pygame.K_a]):
@@ -113,10 +113,10 @@ class Player():
                 left = pygame.image.load('img/scuba_man.png')
                 self.image = pygame.transform.scale(left, (40, 70))
             #player can jump infititely vertical
-            if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w] or key[pygame.K_UP]) and self.jumped == False:
                 self.vel_y = -10
                 self.jumped = True
-            if (key[pygame.K_SPACE] or key[pygame.K_w]) == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w] or key[pygame.K_UP]) == False:
                 self.jumped = False
 
             #make gravity (heavier for lvl 2)
@@ -178,11 +178,11 @@ class Player():
 
             #get keypresses
             key = pygame.key.get_pressed()
-            if (key[pygame.K_SPACE] or key[pygame.K_w]) and self.jumped == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w] or key[pygame.K_UP]) and self.jumped == False:
                 self.vel_y = -15
                 self.jumped = True
             #set jumped back to false
-            if (key[pygame.K_SPACE] or key[pygame.K_w]) == False:
+            if (key[pygame.K_SPACE] or key[pygame.K_w] or key[pygame.K_UP]) == False:
                 self.jumped = False
             if (key[pygame.K_LEFT] or key[pygame.K_a]):
                 dx -= 5
